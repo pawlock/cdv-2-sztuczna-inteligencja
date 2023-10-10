@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Dawid Pawlak Sztuczna Inteligencja</title>
+  <script src="ai-project.js"></script>
+</head>
+  
+<style>
+  #parent {
+  display: flex;
+  flex-direction: column;
+  }
+
+  .row {
+    height: 27px;
+  }
+  
+  .elem {
+    width: 25px;
+    height: 25px;
+    border: 1px solid green;
+    display: inline-block;
+  }
+</style>
+
+<body>
+  <button id="btn" type="button">Stwórz Pole!</button>
+  <button id="btn2" type="button">Start!</button>
+  <input type="number" id="time" name="time" value="1">
+  <button id="btn3" type="button">Rewind!</button>
+  <p id="tries"></p>
+  <div id="parent">
+  </div>
+
+  <script>
+    var clicked = true;
+    const tab = ['3e1','3e2','3e3','3e4','3e8','3e9','3e10','3e11','3e12','3e13','3e17','3e18','3e19','3e20',
+                '7e1','7e2','7e3','7e4','7e8','7e9','7e10','7e11','7e12','7e13','7e17','7e18','7e19','7e20',
+                '11e1','11e2','11e3','11e4','11e8','11e9','11e10','11e11','11e12','11e13','11e17','11e18','11e19','11e20',
+                '15e1','15e2','15e3','15e4','15e8','15e9','15e10','15e11','15e12','15e13','15e17','15e18','15e19','15e20'];
+    document.getElementById("btn").addEventListener("click", ()=>{
+      if(clicked){
+        for (var i = 1; i < 21; i++) {
+        var row = createRow(i);
+        for (var k = 1; k < 21; k++) {
+          createElement(row, k, i);
+        };
+      };
+      for( var j = 0; j < tab.length; j++){
+        const element = document.getElementsByClassName(`${tab[j]}`);
+        element[0].style.backgroundColor = 'black';
+      }
+        clicked = false;
+        const element = document.getElementsByClassName(`20e20`);
+        element[0].style.backgroundColor = 'yellow';
+      }
+    });
+  
+  
+    function createRow(num) {
+      var parent = document.getElementById('parent');
+      var row = document.createElement('div');
+      row.className = `row`;
+      row.setAttribute("id",`${num}`);
+      parent.appendChild(row);
+      return row;
+    }
+  
+    function createElement(parent, num, row) {
+      var elem = document.createElement('div');
+      elem.className = `elem`;
+      elem.classList.add(`${row}e${num}`)
+      elem.style.backgroundColor = 'white';
+      parent.appendChild(elem);
+    }
+  </script>
+</body>
+
+</html>
